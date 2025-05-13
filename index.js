@@ -1,7 +1,6 @@
 ﻿function createElement(tag, attributes, children, callbacks) {
   const element = document.createElement(tag);
 
-  // Обработка атрибутов с учетом специальных свойств
   if (attributes) {
     Object.keys(attributes).forEach((key) => {
       if (key === 'checked') {
@@ -12,7 +11,6 @@
     });
   }
 
-  // Обработка колбэков
   if (callbacks) {
     for (const [action, func] of Object.entries(callbacks)) {
       const eventName = action.toLowerCase().replace('on', '');
@@ -20,7 +18,6 @@
     }
   }
 
-  // Обработка дочерних элементов
   const appendChild = (child) => {
     if (typeof child === "string") {
       element.appendChild(document.createTextNode(child));
@@ -79,7 +76,7 @@ class AddTask extends Component {
       }),
       createElement("button", {
         class: "add-btn",
-        style: "background: #007bff; color: white; border: none; padding: 4px 8px; cursor: pointer;"
+        style: "background: blue; color: white; border: none; padding: 4px 8px; cursor: pointer;"
       }, "+", {
         onClick: () => {
           if (this.inputValue.trim()) {
@@ -123,8 +120,8 @@ class Task extends Component {
       }, this.task.text),
       createElement("button", {
         style: this.confirmDelete
-            ? "background: #dc3545; color: white; border: none; padding: 4px 8px; cursor: pointer;"
-            : "background: #6c757d; color: white; border: none; padding: 4px 8px; cursor: pointer;"
+            ? "background: red; color: white; border: none; padding: 4px 8px; cursor: pointer;"
+            : "background: blue; color: white; border: none; padding: 4px 8px; cursor: pointer;"
       }, this.confirmDelete ? "Удалить?" : "🗑️", {
         onClick: () => {
           if (!this.confirmDelete) {
@@ -174,7 +171,6 @@ class TodoList extends Component {
   }
 }
 
-// Инициализация приложения
 document.addEventListener("DOMContentLoaded", () => {
   document.body.style.backgroundColor = "#f8f9fa";
   document.body.appendChild(new TodoList().getDomNode());
